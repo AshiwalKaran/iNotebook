@@ -5,6 +5,7 @@ const database='practiceInotebook';
 
 const connectToMongo=async()=>{
     try {
+        mongoose.set('strictQuery',false); //To remove DeprecationWarning. 
         await mongoose.connect(`mongodb://${server}/${database}`);
         console.log('Mongodb connected');
     } catch (error) {
