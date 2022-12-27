@@ -4,9 +4,10 @@ const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fetchuser =require('../middleware/fetchuser');
 
 //JWT secret
-const JWT_SECRET = 'Karanisagoodboy';
+const JWT_SECRET = 'Karanisagoodb$oy';
 
 //Route 1--> New user creation
 //POST using "/api/auth/createUser"
@@ -55,7 +56,7 @@ router.post('/createUser', [
             res.json({ authtoken });
         } catch (error) {
             console.error(error.message);
-            res.status(500).send('Some error occured');
+            res.status(500).send('Interval server error');
         }
     });
 
@@ -93,8 +94,21 @@ router.post('/createUser', [
             
         } catch (error) {
             console.log(error.message);
-            res.status(500).send('Some error occured')
+            res.status(500).send('Interval server error');
         }
     });
+
+    //Route 3--> Get loggedin User details using POST "/api/auth/getUser"
+
+    router.post('/getUser',fetchuser,async(req,res)=>{
+        try {
+            const userId=req.user.id;
+            const user=await User.findById(userId).select('-password');
+            res.send(user);
+        } catch (error) {
+            console.log(error.message);
+            res.status(500).send('Interval server error');
+        }
+    })
     
 module.exports = router;
