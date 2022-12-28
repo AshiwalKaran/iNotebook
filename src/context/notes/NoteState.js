@@ -3,25 +3,40 @@ import { useState } from "react";
 import React from 'react'
 
 const NoteState = (props) => {
-    //created a new state s1
-    const s1={
-        "name":"Karan",
-        "class":"5a"
-    }
-    const [state, setState] = useState(s1);
-
-    const update=()=>{
-        setTimeout(()=>{
-            setState({
-                "name":"Akash",
-                "class":"10a"
-            })
-        },2000)
-    }
+    const notesInitial=[
+        {
+          "_id": "63ac025793ac5ea66369ba67",
+          "user": "63ac0014af7e4361a0e06f21",
+          "title": "My title",
+          "description": "hello world",
+          "tag": "personal",
+          "date": "2022-12-28T08:46:15.948Z",
+          "__v": 0
+        },
+        {
+          "_id": "63ac025893ac5ea66369ba69",
+          "user": "63ac0014af7e4361a0e06f21",
+          "title": "My title",
+          "description": "hello world",
+          "tag": "personal",
+          "date": "2022-12-28T08:46:16.167Z",
+          "__v": 0
+        },
+        {
+          "_id": "63ac025893ac5ea66369ba6b",
+          "user": "63ac0014af7e4361a0e06f21",
+          "title": "My title",
+          "description": "hello world",
+          "tag": "personal",
+          "date": "2022-12-28T08:46:16.907Z",
+          "__v": 0
+        }
+      ];
+      const [notes, setNotes] = useState(notesInitial);
 
   return (
     //we are passing the state and update function to all the child components of Notestate
-    <NoteContext.Provider value={{state,update}}>
+    <NoteContext.Provider value={{notes,setNotes}}>
         {props.children}
     </NoteContext.Provider>
   )
