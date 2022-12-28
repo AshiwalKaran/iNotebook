@@ -1,5 +1,5 @@
 import NoteContext from "./noteContext";
-
+import { useState } from "react";
 import React from 'react'
 
 const NoteState = (props) => {
@@ -8,10 +8,20 @@ const NoteState = (props) => {
         "name":"Karan",
         "class":"5a"
     }
+    const [state, setState] = useState(s1);
+
+    const update=()=>{
+        setTimeout(()=>{
+            setState({
+                "name":"Akash",
+                "class":"10a"
+            })
+        },2000)
+    }
 
   return (
-    //we are passing the state s1 to all the child components of Notestate
-    <NoteContext.Provider value={s1}>
+    //we are passing the state and update function to all the child components of Notestate
+    <NoteContext.Provider value={{state,update}}>
         {props.children}
     </NoteContext.Provider>
   )
