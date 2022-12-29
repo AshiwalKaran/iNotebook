@@ -50,9 +50,17 @@ const NoteState = (props) => {
         setNotes(notes.concat(note));
       }
 
+      //Delete a Note
+      const deleteNote=(id)=>{
+        //TODO API CALL
+        console.log('Deleting the note with id: '+id);
+        const newNotes=notes.filter((note)=>{return note._id!==id});
+        setNotes(newNotes);
+      }
+
   return (
     //we are passing the state and update function to all the child components of Notestate
-    <NoteContext.Provider value={{notes,setNotes,addNote}}>
+    <NoteContext.Provider value={{notes,setNotes,addNote,deleteNote}}>
         {props.children}
     </NoteContext.Provider>
   )
