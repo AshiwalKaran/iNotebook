@@ -34,9 +34,25 @@ const NoteState = (props) => {
       ];
       const [notes, setNotes] = useState(notesInitial);
 
+      //Add a note
+      const addNote=(title,description,tag)=>{
+        //TO DO API CALL
+        console.log('Adding a new note');
+        const note={
+          "_id": "63ac025893ac5ea66369ba69",
+          "user": "63ac0014af7e4361a0e06f21",
+          "title": title,
+          "description": description,
+          "tag": tag,
+          "date": "2022-12-28T08:46:16.167Z",
+          "__v": 0
+        }
+        setNotes(notes.concat(note));
+      }
+
   return (
     //we are passing the state and update function to all the child components of Notestate
-    <NoteContext.Provider value={{notes,setNotes}}>
+    <NoteContext.Provider value={{notes,setNotes,addNote}}>
         {props.children}
     </NoteContext.Provider>
   )
