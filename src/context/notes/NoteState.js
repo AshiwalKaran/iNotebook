@@ -79,14 +79,18 @@ const NoteState = (props) => {
         });
         const json=response.json();
 
+        let newNotes=JSON.parse(JSON.stringify(notes));
+        //logic to edit the Note
         for (let index = 0; index < notes.length; index++) {
-          const element = notes[index];
+          const element = newNotes[index];
           if(element._id===id){
-            element.title=title;
-            element.description=description;
-            element.tag=tag;
+            newNotes[index].title=title;
+            newNotes[index].description=description;
+            newNotes[index].tag=tag;
+            break;
           }
         }
+        setNotes(newNotes);
       }
 
   return (

@@ -26,11 +26,11 @@ const Notes = () => {
   const handleClick = (event) => {
     refClose.current.click(); //To close the Modal
 
-    console.log('updating the note',editedNote);
-    event.preventDefault();
+    // console.log(editedNote.id);
+    // event.preventDefault();
+    
     //Calling the editNote function to update the note in the backend
-    // console.log(editedNote._id);
-    // editNote(editedNote._id, editedNote.editedTitle, editedNote.editedDescription, editedNote.editedTag);
+    editNote(editedNote.id, editedNote.editedTitle, editedNote.editedDescription, editedNote.editedTag);
   }
 
   const onChange = (event) => {
