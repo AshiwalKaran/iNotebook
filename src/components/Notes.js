@@ -28,7 +28,7 @@ const Notes = () => {
 
     // console.log(editedNote.id);
     // event.preventDefault();
-    
+
     //Calling the editNote function to update the note in the backend
     editNote(editedNote.id, editedNote.editedTitle, editedNote.editedDescription, editedNote.editedTag);
   }
@@ -57,15 +57,15 @@ const Notes = () => {
               <form className="my-3">
                 <div className="mb-3">
                   <label htmlFor="editedTitle" className="form-label">Title</label>
-                  <input type="text" className="form-control" id="editedTitle" name="editedTitle" value={editedNote.editedTitle} aria-describedby="emailHelp" onChange={onChange} />
+                  <input type="text" className="form-control" id="editedTitle" name="editedTitle" value={editedNote.editedTitle} aria-describedby="emailHelp" onChange={onChange} minLength={5} required />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="editedDescription" className="form-label">Description</label>
-                  <input type="text" className="form-control" id="editedDescription" name="editedDescription" value={editedNote.editedDescription} onChange={onChange} />
+                  <input type="text" className="form-control" id="editedDescription" name="editedDescription" value={editedNote.editedDescription} onChange={onChange} minLength={5} required />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="editedTag" className="form-label">Tag</label>
-                  <input type="text" className="form-control" id="editedTag" name="editedTag" value={editedNote.editedTag} onChange={onChange} />
+                  <input type="text" className="form-control" id="editedTag" name="editedTag" value={editedNote.editedTag} onChange={onChange} minLength={3} required />
                 </div>
 
               </form>
@@ -79,6 +79,9 @@ const Notes = () => {
       </div>
       <div className='row my-3'>
         <h2>Your Notes</h2>
+        <div className="container">
+          {notes.length===0 && 'No notes to display'}
+        </div>
         {notes.map((note) => {
           return <Noteitem note={note} key={note._id} updateNote={updateNote} />
         })}
