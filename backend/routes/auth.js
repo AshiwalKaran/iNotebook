@@ -20,16 +20,16 @@ router.post('/createUser', [
         //If there are errors ,return Bad request and the errors.
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({success, errors: errors.array() });
         }
-
+        let success=false;
         try {
             // console.log(req.body);
 
             //checking if the user with this email already exists or not
             let user = await User.findOne({ email: req.body.email });
             if (user) {
-                return res.status(400).json({ error: "Sorry a user with this email already exists" });
+                return res.status(400).json({ success,error: "Sorry a user with this email already exists" });
             }
 
             //Hashing and using salt
@@ -52,8 +52,9 @@ router.post('/createUser', [
                     id: user.id
                 }
             }
+            success=true;
             const authtoken = jwt.sign(data, JWT_SECRET);
-            res.json({ authtoken });
+            res.json({success, authtoken });
         } catch (error) {
             console.error(error.message);
             res.status(500).send('Interval server error');
