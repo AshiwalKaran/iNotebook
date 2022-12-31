@@ -37,13 +37,14 @@ const Login = (props) => {
 
 
   return (
-    <div className='container'>
+    <div className="mt-2">
+      <h2 className="my-2">Login to use iNotebook.</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        <div className="my-3">
           <label htmlFor="email" className="form-label">Email address</label>
           <input type="email" className="form-control" value={credentials.email} name="email" id="email" aria-describedby="emailHelp" onChange={onChange} />
         </div>
-        <div className="mb-3">
+        <div className="my-3">
           <label htmlFor="password" className="form-label">Password</label>
           <input type="password" className="form-control" value={credentials.password} name="password" id="password" onChange={onChange} />
         </div>
