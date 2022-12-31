@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = (props) => {
 
   const [credentials,setCredentials]=useState({name:'',email:'',password:'',cpassword:''});
 
@@ -18,14 +18,15 @@ const Signup = () => {
       body: JSON.stringify({name:credentials.name, email: credentials.email, password: credentials.password })
     });
     const json=await response.json();
-    console.log(json);
-    if(json.success){
+    console.log(json.success);
+    if(json.success===true){
       //Save the authtoken and redirect
-      // console.log(json);
+      localStorage.setItem('token',json.authtoken);
+      props.showAlert('Account Created Successfully','success');
       navigate('/');
     }
-    else{
-
+    else if(json.success===false){
+      props.showAlert('Invalid Credentials','danger');
     }
   }
 
@@ -38,11 +39,11 @@ const Signup = () => {
       <form onSubmit={handleSubmit}>
       <div className="mb-3">
           <label htmlFor="name" className="form-label">Name</label>
-          <input type="text" value={credentials.name} name="name" className="form-control" id="name" aria-describedby="emailHelp" onChange={onChange} minLength={3} required/>
+          <input type="text" value={credentials.name} name="name" className="form-control" id="name" aria-describedby="emailHelp" onChange={onChange} />
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email address</label>
-          <input type="email" value={credentials.email} name="email" className="form-control" id="email" aria-describedby="emailHelp" onChange={onChange} required/>
+          <input type="email" value={credentials.email} name="email" className="form-control" id="email" aria-describedby="emailHelp" onChange={onChange}/>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">Password</label>

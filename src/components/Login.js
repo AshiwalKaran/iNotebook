@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
 
   //Navigate Hook to redirect
   let navigate = useNavigate();
@@ -23,11 +23,12 @@ const Login = () => {
 
     if (json.success) {
       //Save the authtoken and redirect
+      props.showAlert('Logged in Successfully','success');
       localStorage.setItem('token', json.authtoken);
       navigate('/');
     }
     else {
-
+      props.showAlert('Invalid Credentials','danger');
     }
   }
   const onChange = (event) => {
